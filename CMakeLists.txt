@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(RGD_FAE VERSION 0.1 LANGUAGES CXX)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -19,6 +20,10 @@ set(PROJECT_SOURCES
         arona.cpp
         arona.h
         arona.ui
+        functionpage.cpp
+        functionpage.h
+        functionpage.ui
+        resources/resources.qrc
         ${TS_FILES}
 )
 

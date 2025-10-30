@@ -1,0 +1,32 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}",
+                "D:/tools/Qt/software/6.9.0/msvc2022_64/include",
+                "D:/tools/Qt/software/6.9.0/msvc2022_64/include/QtWidgets",
+                "D:/tools/Qt/software/6.9.0/msvc2022_64/include/QtCore",
+                "D:/tools/Qt/software/6.9.0/msvc2022_64/include/QtGui",
+                "D:/tools/Qt/software/6.9.0/msvc2022_64/mkspecs/win32-msvc",
+                "${workspaceFolder}/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Debug/RGD_FAE_autogen/include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "WIN32",
+                "_WINDOWS",
+                "QT_WIDGETS_LIB",
+                "QT_GUI_LIB",
+                "QT_CORE_LIB"
+            ],
+            "windowsSdkVersion": "10.0.26100.0",
+            "compilerPath": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/HostX64/x64/cl.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    ],
+    "version": 4
+}
