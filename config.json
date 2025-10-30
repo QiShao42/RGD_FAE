@@ -1,8 +1,0 @@
-{
-    "parameters": {
-        "rx_count": 40,
-        "tx_count": 18,
-        "raw_threshold": 450,
-        "signal_threshold": 150
-    }
-}

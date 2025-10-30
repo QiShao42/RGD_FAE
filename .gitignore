@@ -67,6 +67,14 @@ CMakeLists.txt.user*
 
 # Python byte code
 *.pyc
+*_rc.py
+
+# Qt resource compiled files
+qrc_*.cpp
+*_rc.cpp
+
+# Config files (user-specific)
+config.json
 
 # Binaries
 # --------
@@ -80,3 +88,4 @@ CMakeLists.txt.user*
 .rcc/
 .uic/
 /build*/
+build/
