@@ -3,10 +3,14 @@
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
+#include <QIcon>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    // 设置应用程序图标（显示在任务栏、Alt+Tab切换窗口等处）
+    a.setWindowIcon(QIcon(":/icons/icons/app_icon.png"));
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

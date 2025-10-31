@@ -103,7 +103,7 @@
             <property name="styleSheet">
              <string notr="true">QPushButton {
     background-color: white;
-    color: #66CCFF;
+    color: #66AAFF;
     border: 2px solid #66CCFF;
     border-radius: 5px;
     font-size: 16px;
