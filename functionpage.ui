@@ -193,6 +193,12 @@ QWidget#paramsArea QSpinBox {
     padding: 3px;
     font-size: 14px;
 }
+QWidget#paramsArea QComboBox {
+    border: 1px solid #66CCFF;
+    border-radius: 3px;
+    padding: 3px;
+    font-size: 14px;
+}
 QWidget#paramsArea QCheckBox {
     color: #003D7A;
     font-size: 15px;
@@ -297,6 +303,27 @@ QWidget#paramsArea QCheckBox::indicator {
                <property name="value">
                 <number>150</number>
                </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="signalCalcLabel">
+               <property name="text">
+                <string>信号计算:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="signalCalcComboBox">
+               <item>
+                <property name="text">
+                 <string>base-raw</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>raw-base</string>
+                </property>
+               </item>
               </widget>
              </item>
              <item>
@@ -879,7 +906,7 @@ QWidget#bottomArea QLineEdit {
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>130</width>
+                   <width>160</width>
                    <height>16777215</height>
                   </size>
                  </property>

@@ -61,6 +61,10 @@ FunctionPage::FunctionPage(QWidget *parent)
     connect(ui->txSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &FunctionPage::onTxCountChanged);
     connect(ui->rawThresholdSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &FunctionPage::onRawThresholdChanged);
     connect(ui->signalThresholdSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &FunctionPage::onSignalThresholdChanged);
+    connect(ui->signalCalcComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]() {
+        saveConfig();
+        displayCurrentFrame();  // 切换计算模式时重新显示信号数据
+    });
     connect(ui->reverseRxCheckBox, &QCheckBox::stateChanged, this, [this]() {
         saveConfig();
         displayCurrentFrame();  // 重新显示数据（表头不变）
@@ -254,6 +258,9 @@ void FunctionPage::loadConfig()
     if (params.contains("signal_threshold")) {
         ui->signalThresholdSpinBox->setValue(params["signal_threshold"].toInt());
     }
+    if (params.contains("signal_calc_mode")) {
+        ui->signalCalcComboBox->setCurrentIndex(params["signal_calc_mode"].toInt());
+    }
     if (params.contains("reverse_rx")) {
         ui->reverseRxCheckBox->setChecked(params["reverse_rx"].toBool());
     }
@@ -321,6 +328,7 @@ void FunctionPage::saveConfig()
     params["tx_count"] = ui->txSpinBox->value();
     params["raw_threshold"] = ui->rawThresholdSpinBox->value();
     params["signal_threshold"] = ui->signalThresholdSpinBox->value();
+    params["signal_calc_mode"] = ui->signalCalcComboBox->currentIndex();
     params["reverse_rx"] = ui->reverseRxCheckBox->isChecked();
 
     // 保存 bottom_1 配置
@@ -1134,14 +1142,24 @@ void FunctionPage::displayCurrentFrame()
         PERF_DEBUG("[性能] 当前模式: 原始数据 (16进制)");
         displayDataInTable(frameData, true);
     } else if (currentDataMode == SignalData) {
-        // 信号数据：基线数据 - 原始数据，以10进制显示
+        // 信号数据：根据选择框决定计算逻辑，以10进制显示
         PERF_DEBUG("[性能] 当前模式: 信号数据 (10进制)");
         if (baselineData.size() == frameData.size()) {
             QElapsedTimer calcTimer;
             calcTimer.start();
             QVector<qint16> signalData;
+
+            // 获取信号计算模式：0 = base-raw, 1 = raw-base
+            int calcMode = ui->signalCalcComboBox->currentIndex();
+
             for (int i = 0; i < frameData.size(); ++i) {
-                signalData.append(baselineData[i] - frameData[i]);
+                if (calcMode == 0) {
+                    // base-raw: 基线数据 - 原始数据
+                    signalData.append(baselineData[i] - frameData[i]);
+                } else {
+                    // raw-base: 原始数据 - 基线数据
+                    signalData.append(frameData[i] - baselineData[i]);
+                }
             }
             PERF_DEBUG("[性能] 计算信号数据耗时:" << calcTimer.elapsed() << "ms");
             displayDataInTable(signalData, false);
